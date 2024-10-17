@@ -110,10 +110,20 @@ int main()
                 c9=Player;
                 break;
             }
+                if((c1==c2 && c2==c3) || (c4==c5 && c5==c6) || (c7==c8 && c8==c9) || (c1==c4 && c4==c7) || (c2==c5 && c5==c8) || (c3==c6 && c6==c9) || (c1==c5 && c5==c9) || (c3==c5 && c5==c7))
+                {
+                    GameOver=1;
+                    printf("Player %c wins!", Player);
+                }
+                else if(c1!=' ' && c2!=' ' && c3!=' ' && c4!=' ' && c5!=' ' && c6!=' ' && c7!=' ' && c8!=' ' && c9!=' ')
+                {
+                    GameOver=1;
+                    printf("It's a draw!");
+                }
         }
         else
         {
-            printf("Invalid move, player. Try again.");
+            printf("Invalid move, player. Try again.\n");
         }
     }
 
