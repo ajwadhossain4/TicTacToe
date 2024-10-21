@@ -1,25 +1,6 @@
 #include<stdio.h>
 
-//print the board
-    //assign characters to each position
-    //give the user an example and be minimalistic
-    //print the board each time a new move is given
-//input moves
-    //only X or O
-//check if moves are valid
-    //move valid for the given position
-    //is the position empty
-//alternate between X and O
-    //users' inputs in a while loop
-    //since this is a game between two players taking a turn each
-//check if pattern is a win or a draw
-    //enter all possible win conditions, either X or O wins
-    //else it's a draw
-    //game only ends when either the whole board is full or if the pattern matches
-
 char c1, c2, c3, c4, c5, c6, c7, c8, c9;
-
-//(c1!=' ' && c2!=' ' && c3!=' ' && c4!=' ' && c5!=' ' && c6!=' ' && c7!=' ' && c8!=' ' && c9!=' ')
 
 void XOXOBoard()
 {
@@ -34,26 +15,51 @@ int XOXOValid(int n)
 {
     switch(n)
     {
-    case 1:
+        case 1:
         return c1 == ' ';
-    case 2:
+        case 2:
         return c2 == ' ';
-    case 3:
+        case 3:
         return c3 == ' ';
-    case 4:
+        case 4:
         return c4 == ' ';
-    case 5:
+        case 5:
         return c5 == ' ';
-    case 6:
+        case 6:
         return c6 == ' ';
-    case 7:
+        case 7:
         return c7 == ' ';
-    case 8:
+        case 8:
         return c8 == ' ';
-    case 9:
+        case 9:
         return c9 == ' ';
-    default:
+        default:
         return 0;
+    }
+}
+
+void XOXOMove(int n, char Player)
+{
+    switch(n)
+    {
+        case 1: c1=Player;
+        break;
+        case 2: c2=Player;
+        break;
+        case 3: c3=Player;
+        break;
+        case 4: c4=Player;
+        break;
+        case 5: c5=Player;
+        break;
+        case 6: c6=Player;
+        break;
+        case 7: c7=Player;
+        break;
+        case 8: c8=Player;
+        break;
+        case 9: c9=Player;
+        break;
     }
 }
 int main()
@@ -74,56 +80,47 @@ int main()
     while(GameOver==0)
     {
         XOXOBoard();
-        printf("\nChoose your move, player %c: ", Player);
+        printf("\nYour turn, player %c: ", Player);
         scanf("%d", &n);
         printf("\n");
 
+        if(n<1 || n>9)
+        {
+            printf("Invalid move, player. Enter a number between 1 and 9.\n");
+            continue;
+        }
+
         if(XOXOValid(n))
         {
-            switch(n)
-            {
-            case 1:
-                c1=Player;
-                break;
-            case 2:
-                c2=Player;
-                break;
-            case 3:
-                c3=Player;
-                break;
-            case 4:
-                c4=Player;
-                break;
-            case 5:
-                c5=Player;
-                break;
-            case 6:
-                c6=Player;
-                break;
-            case 7:
-                c7=Player;
-                break;
-            case 8:
-                c8=Player;
-                break;
-            case 9:
-                c9=Player;
-                break;
-            }
-                if((c1==c2 && c2==c3) || (c4==c5 && c5==c6) || (c7==c8 && c8==c9) || (c1==c4 && c4==c7) || (c2==c5 && c5==c8) || (c3==c6 && c6==c9) || (c1==c5 && c5==c9) || (c3==c5 && c5==c7))
+            XOXOMove(n, Player);
+
+            if((c1==c2 && c2==c3 && c1!=' ' && c2!=' ' && c3!=' ') ||
+               (c4==c5 && c5==c6 && c4!=' ' && c5!=' ' && c6!=' ') ||
+               (c7==c8 && c8==c9 && c7!=' ' && c8!=' ' && c9!=' ') ||
+               (c1==c4 && c4==c7 && c1!=' ' && c4!=' ' && c7!=' ') ||
+               (c2==c5 && c5==c8 && c2!=' ' && c5!=' ' && c8!=' ') ||
+               (c3==c6 && c6==c9 && c3!=' ' && c6!=' ' && c9!=' ') ||
+               (c1==c5 && c5==c9 && c1!=' ' && c5!=' ' && c9!=' ') ||
+               (c3==c5 && c5==c7 && c3!=' ' && c5!=' ' && c7!=' '))
                 {
                     GameOver=1;
-                    printf("Player %c wins!", Player);
+                    XOXOBoard();
+                    printf("Player %c wins!\n", Player);
                 }
-                else if(c1!=' ' && c2!=' ' && c3!=' ' && c4!=' ' && c5!=' ' && c6!=' ' && c7!=' ' && c8!=' ' && c9!=' ')
+            else if(c1!=' ' && c2!=' ' && c3!=' ' && c4!=' ' && c5!=' ' && c6!=' ' && c7!=' ' && c8!=' ' && c9!=' ')
                 {
                     GameOver=1;
-                    printf("It's a draw!");
+                    XOXOBoard();
+                    printf("It's a draw!\n");
+                }
+                else
+                {
+                    Player = (Player=='X') ? 'O' : 'X';
                 }
         }
         else
         {
-            printf("Invalid move, player. Try again.\n");
+            printf("Invalid move, player. Position %d is already taken. Try again.\n\n", n);
         }
     }
 
