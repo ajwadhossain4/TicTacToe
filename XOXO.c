@@ -70,7 +70,7 @@ int main()
     char Player = 'X';
     int GameOver = 0;
 
-    printf("Let's play Tic Tac Toe!\nEnter the position number where you'd like to make your move -\n\n");
+    printf("Ready to play Tic Tac Toe?\nSelect a number between 1 and 9 to make your move -\n\n");
     printf(" 1 | 2 | 3 \n");
     printf(" - + - + - \n");
     printf(" 4 | 5 | 6 \n");
